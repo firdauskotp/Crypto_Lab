@@ -12,14 +12,20 @@ import numpy as np #pip install numpy
 import base64
 from datetime import datetime
 
-graph = tf.compat.v1.get_default_graph()
+graph = tf.compat.v1.get_default_graph() #tf2 uses this version
 app=Flask(__name__)
 CORS(app)
 
-s1=tf.compat.v1.Session()
+s1=tf.compat.v1.Session() #tf2 uses this version
 set_session(s1)
 
 mod=tf.keras.models.load_model('model/facenet_keras.h5', compile=False)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
 #Convert image to 128d
 def img_to_encoding(path, model):
     img1 = cv2.imread(path, 1)
